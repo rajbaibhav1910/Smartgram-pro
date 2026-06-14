@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Submit Complaint – SmartGram Pro{% endblock %}
+{% block content %}
+<section class="page-section py-5 mt-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="page-card">
+          <div class="page-card-header">
+            <h2><i class="fas fa-file-alt me-2"></i>Submit a Complaint</h2>
+            <p>Describe your issue and we'll ensure the right authorities are notified</p>
+          </div>
+          <div class="page-card-body">
+            <form method="POST" action="{{ url_for('submit_complaint') }}"
+                  enctype="multipart/form-data" id="complaintForm">
+              
+              <div class="mb-4">
+                <label class="form-label fw-600">Complaint Category *</label>
+                <div class="input-group-custom">
+                  <i class="fas fa-tag input-icon"></i>
+                  <select class="form-select custom-input" name="category" required>
+                    <option value="">-- Select Category --</option>
+                    {% for cat in categories %}
+                      <option value="{{ cat }}">{{ cat }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label fw-600">Complaint Description *</label>
+                <textarea class="form-control custom-textarea" name="description"
+                          rows="5" placeholder="Describe the issue in detail. Include location, severity, and how long the problem has existed..."
+                          required minlength="20"></textarea>
+                <small class="text-muted">Minimum 20 characters. Be as specific as possible.</small>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label fw-600">Attach Photo Evidence (Optional)</label>
+                <div class="file-upload-area" id="fileDropArea">
+                  <input type="file" class="d-none" name="image" id="imageUpload"
+                         accept=".jpg,.jpeg,.png,.gif">
+                  <div class="file-upload-content" onclick="document.getElementById('imageUpload').click()">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Click to upload or drag & drop</p>
+                    <small>JPG, PNG, GIF — Max 1 MB</small>
+                  </div>
+                  <div class="file-preview d-none" id="filePreview">
+                    <img id="previewImage" src="" alt="Preview" class="img-fluid rounded">
+                    <p id="fileName" class="mt-2 text-muted"></p>
+                    <button type="button" class="btn btn-sm btn-outline-danger"
+                            onclick="clearFile()">Remove</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-4 info-box">
+                <i class="fas fa-info-circle me-2 text-info"></i>
+                <strong>Your Details:</strong>
+                Village: {{ session.village }} | Username: {{ session.username }}
+              </div>
+
+              <div class="d-flex gap-3">
+                <button type="submit" class="btn btn-submit-primary">
+                  <i class="fas fa-paper-plane me-2"></i>Submit Complaint
+                </button>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+                  <i class="fas fa-arrow-left me-2"></i>Back
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Image preview
+document.getElementById('imageUpload').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      document.getElementById('previewImage').src = ev.target.result;
+      document.getElementById('fileName').textContent = file.name;
+      document.getElementById('fileDropArea').querySelector('.file-upload-content').classList.add('d-none');
+      document.getElementById('filePreview').classList.remove('d-none');
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+function clearFile() {
+  document.getElementById('imageUpload').value = '';
+  document.getElementById('fileDropArea').querySelector('.file-upload-content').classList.remove('d-none');
+  document.getElementById('filePreview').classList.add('d-none');
+}
+</script>
+{% endblock %}

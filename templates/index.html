@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% block title %}Home – Digital Village Governance{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-bg-animation">
+    <div class="hero-circle c1"></div>
+    <div class="hero-circle c2"></div>
+    <div class="hero-circle c3"></div>
+  </div>
+  <div class="container">
+    <div class="row align-items-center min-vh-100">
+      <div class="col-lg-6">
+        <div class="hero-badge mb-3">
+          <i class="fas fa-leaf me-2"></i>Digital India Initiative
+        </div>
+        <h1 class="hero-title">
+          Smart Governance<br>
+          <span class="hero-highlight">for Every Village</span>
+        </h1>
+        <p class="hero-subtitle">
+          Submit complaints, track resolution, receive alerts, and access government schemes — 
+          all in one place. Bringing transparency to rural governance through cloud technology.
+        </p>
+        <div class="hero-actions d-flex flex-wrap gap-3 mt-4">
+          {% if session.user_id %}
+            <a href="{{ url_for('submit_complaint') }}" class="btn btn-hero-primary">
+              <i class="fas fa-plus-circle me-2"></i>Submit Complaint
+            </a>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-hero-outline">
+              <i class="fas fa-list me-2"></i>Track My Complaints
+            </a>
+          {% else %}
+            <a href="{{ url_for('register') }}" class="btn btn-hero-primary">
+              <i class="fas fa-user-plus me-2"></i>Get Started Free
+            </a>
+            <a href="{{ url_for('login') }}" class="btn btn-hero-outline">
+              <i class="fas fa-sign-in-alt me-2"></i>Login
+            </a>
+          {% endif %}
+        </div>
+        <div class="hero-features mt-5 d-flex flex-wrap gap-4">
+          <div class="hero-feature-item">
+            <i class="fas fa-shield-alt text-success me-2"></i>Secure & Private
+          </div>
+          <div class="hero-feature-item">
+            <i class="fas fa-bolt text-warning me-2"></i>Real-time Tracking
+          </div>
+          <div class="hero-feature-item">
+            <i class="fas fa-mobile-alt text-info me-2"></i>Mobile Friendly
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 d-none d-lg-flex justify-content-center">
+        <div class="hero-illustration">
+          <div class="hero-card-float card1">
+            <i class="fas fa-check-circle text-success"></i>
+            <span>Complaint Resolved!</span>
+          </div>
+          <div class="hero-village-icon">
+            <i class="fas fa-city"></i>
+          </div>
+          <div class="hero-card-float card2">
+            <i class="fas fa-bell text-warning"></i>
+            <span>New Alert Sent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section py-5">
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4">
+        <div class="stat-card">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-number" id="totalComplaints">{{ complaints_count }}</h3>
+            <p class="stat-label">Total Complaints</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stat-card">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+            <i class="fas fa-check-double"></i>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-number" id="resolvedCount">{{ resolved }}</h3>
+            <p class="stat-label">Complaints Resolved</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stat-card">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+            <i class="fas fa-bullhorn"></i>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-number" id="noticesCount">{{ notices_count }}</h3>
+            <p class="stat-label">Active Notices</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <h2 class="section-title">Everything Your Village Needs</h2>
+      <p class="section-subtitle">One platform for all panchayat services</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-file-upload"></i>
+          </div>
+          <h3>Submit Complaints</h3>
+          <p>Report road damage, water issues, electricity problems with photo evidence. Get a unique tracking ID instantly.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3>Track Status</h3>
+          <p>Know exactly where your complaint stands — Pending, In Progress, or Resolved. No more guessing.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bell"></i>
+          </div>
+          <h3>Instant Alerts</h3>
+          <p>Receive email notifications when your complaint is filed, updated, or resolved via AWS SNS.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-newspaper"></i>
+          </div>
+          <h3>Panchayat Notices</h3>
+          <p>Stay informed about gram sabha meetings, local announcements, and important dates.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+          <h3>Government Schemes</h3>
+          <p>Discover welfare schemes you qualify for — PM Awas, PM Kisan, MGNREGA, and many more.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-chart-pie"></i>
+          </div>
+          <h3>Admin Analytics</h3>
+          <p>Admins get real-time dashboards, complaint trends, category breakdowns, and resolution rates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="howto-section py-5">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">Three simple steps to digital governance</p>
+    </div>
+    <div class="row g-4 align-items-center">
+      <div class="col-md-4 text-center">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h4>Register & Login</h4>
+          <p>Create your account with village details. Secure login with session management.</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h4>Submit Complaint</h4>
+          <p>Fill the complaint form, attach photo evidence. Get instant confirmation with unique ID.</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h4>Track & Receive Alerts</h4>
+          <p>Monitor status in real-time. Get email notifications at every step of resolution.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

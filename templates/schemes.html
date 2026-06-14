@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Government Schemes – SmartGram Pro{% endblock %}
+{% block content %}
+<section class="page-section py-5 mt-5">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <h1><i class="fas fa-hand-holding-heart me-2"></i>Government Schemes</h1>
+      <p>Discover welfare schemes and benefits you are entitled to as a citizen</p>
+    </div>
+    <div class="row g-4">
+      {% for scheme in schemes %}
+      <div class="col-md-6">
+        <div class="scheme-card">
+          <div class="scheme-header">
+            <div class="scheme-icon"><i class="fas fa-star"></i></div>
+            <h4>{{ scheme.name }}</h4>
+          </div>
+          <p class="scheme-desc">{{ scheme.description }}</p>
+          <div class="scheme-details">
+            <div class="scheme-detail-item">
+              <i class="fas fa-gift text-success me-2"></i>
+              <strong>Benefit:</strong> {{ scheme.benefit }}
+            </div>
+            <div class="scheme-detail-item">
+              <i class="fas fa-user-check text-info me-2"></i>
+              <strong>Eligibility:</strong> {{ scheme.eligibility }}
+            </div>
+          </div>
+          <a href="{{ scheme.link }}" target="_blank" class="btn btn-scheme-apply">
+            <i class="fas fa-external-link-alt me-2"></i>Apply / Know More
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

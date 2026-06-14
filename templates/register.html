@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Register – SmartGram Pro{% endblock %}
+{% block content %}
+<section class="auth-section">
+  <div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100 py-5">
+      <div class="col-md-6">
+        <div class="auth-card">
+          <div class="auth-header">
+            <div class="auth-logo"><i class="fas fa-user-plus"></i></div>
+            <h2>Create Account</h2>
+            <p>Join SmartGram Pro to access village services</p>
+          </div>
+          <form method="POST" action="{{ url_for('register') }}" id="registerForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-600">Username *</label>
+                <div class="input-group-custom">
+                  <i class="fas fa-user input-icon"></i>
+                  <input type="text" class="form-control custom-input" name="username"
+                         placeholder="e.g. ramesh_kumar" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-600">Email Address *</label>
+                <div class="input-group-custom">
+                  <i class="fas fa-envelope input-icon"></i>
+                  <input type="email" class="form-control custom-input" name="email"
+                         placeholder="your@email.com" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-600">Password *</label>
+                <div class="input-group-custom">
+                  <i class="fas fa-lock input-icon"></i>
+                  <input type="password" class="form-control custom-input" name="password"
+                         id="reg-password" placeholder="Min 8 characters" required>
+                  <button type="button" class="toggle-password" onclick="togglePassword('reg-password')">
+                    <i class="fas fa-eye" id="reg-password-eye"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-600">Village Name *</label>
+                <div class="input-group-custom">
+                  <i class="fas fa-map-marker-alt input-icon"></i>
+                  <input type="text" class="form-control custom-input" name="village"
+                         placeholder="e.g. Rampur" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-600">Phone Number *</label>
+                <div class="input-group-custom">
+                  <i class="fas fa-phone input-icon"></i>
+                  <input type="tel" class="form-control custom-input" name="phone"
+                         placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-600">Role</label>
+                <div class="input-group-custom">
+                  <i class="fas fa-id-badge input-icon"></i>
+                  <select class="form-select custom-input" name="role">
+                    <option value="villager">Villager (Citizen)</option>
+                    <option value="admin">Admin (Panchayat Staff)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-auth-primary w-100 mt-4">
+              <i class="fas fa-user-plus me-2"></i>Create Account
+            </button>
+          </form>
+          <div class="auth-footer">
+            <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

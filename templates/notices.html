@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Notices – SmartGram Pro{% endblock %}
+{% block content %}
+<section class="page-section py-5 mt-5">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <h1><i class="fas fa-bullhorn me-2"></i>Panchayat Notices</h1>
+      <p>Official announcements and important updates from your Gram Panchayat</p>
+    </div>
+    <div class="row g-4">
+      {% for notice in notices %}
+      <div class="col-md-6 col-lg-4">
+        <div class="notice-card notice-{{ notice.category.lower() }}">
+          <div class="notice-category-tag">
+            <i class="fas fa-{% if notice.category=='Meeting' %}users{% elif notice.category=='Alert' %}exclamation-triangle{% elif notice.category=='Scheme' %}hand-holding-heart{% else %}info-circle{% endif %} me-1"></i>
+            {{ notice.category }}
+          </div>
+          <h4 class="notice-title">{{ notice.title }}</h4>
+          <p class="notice-content">{{ notice.content }}</p>
+          <div class="notice-footer">
+            <span><i class="fas fa-user me-1"></i>{{ notice.posted_by }}</span>
+            <span><i class="fas fa-calendar me-1"></i>{{ notice.posted_at[:10] }}</span>
+          </div>
+          {% if notice.expiry_date %}
+          <div class="notice-expiry">
+            <i class="fas fa-clock me-1"></i>Valid until: {{ notice.expiry_date }}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% else %}
+      <div class="col-12 text-center py-5">
+        <i class="fas fa-inbox fa-3x text-muted mb-3 d-block"></i>
+        <p class="text-muted">No notices posted yet. Check back soon.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
