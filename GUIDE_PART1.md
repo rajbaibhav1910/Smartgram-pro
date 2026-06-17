@@ -1,6 +1,5 @@
 # SmartGram Pro – Cloud-Based Digital Village Governance Platform
 ## COMPLETE IMPLEMENTATION GUIDE — PART 1
-
 ---
 
 # SECTION 1 — PROJECT OVERVIEW
