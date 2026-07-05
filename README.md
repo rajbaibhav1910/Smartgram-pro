@@ -143,7 +143,7 @@ SmartGram-Pro/
 
 ### Prerequisites
 - AWS Account (Free Tier eligible)
-- EC2 instance (Ubuntu 22.04, t2.micro)
+- EC2 instance (Ubuntu 24.04, t3.micro)
 - IAM Role with DynamoDB, S3, SNS permissions attached to EC2
 
 ### Quick Start
