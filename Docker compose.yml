@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  smartgram-pro:
+    build: .
+    container_name: smartgram-pro
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
