@@ -1,4 +1,4 @@
-#!/bin/bash
+\#!/bin/bash
 # SmartGram Pro – EC2 Setup Script
 # Run this after connecting to EC2 for the first time
 # Usage: bash setup.sh
